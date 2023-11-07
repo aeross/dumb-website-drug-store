@@ -25,109 +25,110 @@
         },
     ]
     -->
-<div>
+<div id="the-wrapper-div-that-wraps-everything-so-that-this-returns-a-single-root-element" class="font-mono">
+    <nav class="navbar fixed top-0 z-10 p-3 bg-base-200 shadow">
+        <div class="navbar-start">
+            <!-- <div class="drawer">
+                <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+                <div class="drawer-content">
+                    <label for="my-drawer" tabindex="0" class="btn btn-ghost btn-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
+                    </label>
+                </div> 
+                <div class="drawer-side z-10">
+                    <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+                    <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+                        <li><a>Category 1</a></li>
+                        <li><a>Category 2</a></li>
+                    </ul>
+                </div>
+            </div> -->
+            
+            <a class="btn btn-ghost normal-case text-3xl font-bold px-6 text-primary-focus">Garage Chemist</a>   
+        </div>
+        <div class="navbar-center">
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn mx-2 btn-primary btn-sm">Filter</label>
+                <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a>Item 1</a></li>
+                    <li><a>Item 2</a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown">
+                <label tabindex="0" class="btn mx-2 btn-primary btn-sm">Sort</label>
+                <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a>Item 1</a></li>
+                    <li><a>Item 2</a></li>
+                </ul>
+            </div>
+            <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto mx-1 input-sm" />
+            <button class="btn btn-ghost btn-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+            </button>
+        </div>
+
+        <div class="navbar-end">
+            <button class="btn mx-2 btn-primary btn-sm">Log In</button>
+            <button class="btn mx-2 btn-primary btn-sm">Sign Up</button>
+        </div>
+    </nav>
     <div id="PAGE-HOME">
         <!-- NAVBAR -->
-        <nav class="navbar bg-base-100 fixed top-0 z-10 p-3">
-            <div class="navbar-start">
-                <div class="drawer">
-                    <input id="my-drawer" type="checkbox" class="drawer-toggle" />
-                    <div class="drawer-content">
-                        <label for="my-drawer" tabindex="0" class="btn btn-ghost btn-circle">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
-                        </label>
-                    </div> 
-                    <div class="drawer-side z-10">
-                        <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-                        <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-                            <li><a>Category 1</a></li>
-                            <li><a>Category 2</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="navbar-center">
-                <div class="dropdown dropdown-end">
-                    <label tabindex="0" class="btn mx-2 btn-primary btn-sm">Filter</label>
-                    <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                        <li><a>Item 1</a></li>
-                        <li><a>Item 2</a></li>
-                    </ul>
-                </div>
 
-                <div class="dropdown">
-                    <label tabindex="0" class="btn mx-2 btn-primary btn-sm">Sort</label>
-                    <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                        <li><a>Item 1</a></li>
-                        <li><a>Item 2</a></li>
-                    </ul>
-                </div>
-                <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto mx-1 input-sm" />
-                <button class="btn btn-ghost btn-circle">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                </button>
-            </div>
-
-            <div class="navbar-end">
-                <button class="btn mx-2 btn-primary btn-sm">Log In</button>
-                <button class="btn mx-2 btn-primary btn-sm">Sign Up</button>
-            </div>
-        </nav>
-
-        <main class="grid grid-cols-4 gap-5 px-10 mt-[90px]">
-            <h1 class="text-3xl text-center font-bold col-span-4 m-4">Branded Things</h1>
+        <main class="grid grid-cols-4 gap-5 px-10 mt-[90px] bg-base-100">
 
             <!-- <div class="grid grid-cols-4 gap-5 px-10 mt-20"> -->
+                <div class="card shadow-xl">
+                    <figure><img src="https://ik.imagekit.io/aeross/cat.jpg?updatedAt=1699260555605" alt="Shoes" /></figure>
+                    <div class="card-body">
+                        <h2 class="card-title">Shoes!</h2>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <div class="card-actions justify-end mt-2">
+                            <button class="btn btn-primary">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-base-100 shadow-xl">
+                    <figure><img src="https://ik.imagekit.io/aeross/default-image.jpg?updatedAt=1698736912023" alt="Shoes" /></figure>
+                    <div class="card-body">
+                        <h2 class="card-title">Shoes!</h2>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <div class="card-actions justify-end mt-2">
+                            <button class="btn btn-primary">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-base-100 shadow-xl">
+                    <figure><img src="https://ik.imagekit.io/aeross/default-image.jpg?updatedAt=1698736912023" alt="Shoes" /></figure>
+                    <div class="card-body">
+                        <h2 class="card-title">Shoes!</h2>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <div class="card-actions justify-end mt-2">
+                            <button class="btn btn-primary">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-base-100 shadow-xl">
+                    <figure><img src="https://ik.imagekit.io/aeross/default-image.jpg?updatedAt=1698736912023" alt="Shoes" /></figure>
+                    <div class="card-body">
+                        <h2 class="card-title">Shoes!</h2>
+                        <p>If a dog chews shoes whose shoes does he choose?</p>
+                        <div class="card-actions justify-end mt-2">
+                            <button class="btn btn-primary">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="card bg-base-100 shadow-xl">
                     <figure><img src="https://ik.imagekit.io/aeross/cat.jpg?updatedAt=1699260555605" alt="Shoes" /></figure>
                     <div class="card-body">
                         <h2 class="card-title">Shoes!</h2>
                         <p>If a dog chews shoes whose shoes does he choose?</p>
-                        <div class="card-actions justify-end">
-                            <button class="btn btn-primary">Buy Now</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card bg-base-100 shadow-xl">
-                    <figure><img src="https://ik.imagekit.io/aeross/default-image.jpg?updatedAt=1698736912023" alt="Shoes" /></figure>
-                    <div class="card-body">
-                        <h2 class="card-title">Shoes!</h2>
-                        <p>If a dog chews shoes whose shoes does he choose?</p>
-                        <div class="card-actions justify-end">
-                            <button class="btn btn-primary">Buy Now</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card bg-base-100 shadow-xl">
-                    <figure><img src="https://ik.imagekit.io/aeross/default-image.jpg?updatedAt=1698736912023" alt="Shoes" /></figure>
-                    <div class="card-body">
-                        <h2 class="card-title">Shoes!</h2>
-                        <p>If a dog chews shoes whose shoes does he choose?</p>
-                        <div class="card-actions justify-end">
-                            <button class="btn btn-primary">Buy Now</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card bg-base-100 shadow-xl">
-                    <figure><img src="https://ik.imagekit.io/aeross/default-image.jpg?updatedAt=1698736912023" alt="Shoes" /></figure>
-                    <div class="card-body">
-                        <h2 class="card-title">Shoes!</h2>
-                        <p>If a dog chews shoes whose shoes does he choose?</p>
-                        <div class="card-actions justify-end">
-                            <button class="btn btn-primary">Buy Now</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card bg-base-100 shadow-xl">
-                    <figure><img src="https://ik.imagekit.io/aeross/cat.jpg?updatedAt=1699260555605" alt="Shoes" /></figure>
-                    <div class="card-body">
-                        <h2 class="card-title">Shoes!</h2>
-                        <p>If a dog chews shoes whose shoes does he choose?</p>
-                        <div class="card-actions justify-end">
+                        <div class="card-actions justify-end mt-2">
                             <button class="btn btn-primary">Buy Now</button>
                         </div>
                     </div>
@@ -147,12 +148,12 @@
 
     <div id="PAGE-DETAIL">
         <main>
-            <div class="hero min-h-screen bg-base-200">
+            <div class="hero bg-base-100 min-h-screen">
                 <div class="hero-content flex-col lg:flex-row">
                     <img src="https://ik.imagekit.io/aeross/cat.jpg?updatedAt=1699260555605" class="max-w-sm rounded-lg shadow-2xl" />
                     <div>
                         <div class="texts">
-                            <h1 class="text-5xl font-bold">Green Ash</h1>
+                            <h1 class="text-5xl font-bold text-primary-focus">Green Ash</h1>
                             <div class="py-6">
                                 <p>This medication is known to relieve pain and reduce inflammation.</p>
                                 <p>Stock: 90</p>
@@ -160,9 +161,14 @@
                             </div>
                         </div>
                         <div class="buttons">
-                            <button class="btn btn-primary">Update</button>
+                            <button class="btn btn-primary">Edit</button>
                             <button class="btn btn-primary">Delete</button>
                         </div>
+                    
+                        <form action="" enctype="multipart/form-data"  method="POST" class="my-1">
+                            <input type="file" id="image" name="image" class="w-52 hidden"/>
+                            <label for="image" class="text-xs ml-1 text-gray-600 hover:text-primary-focus hover:cursor-pointer">Upload Image</label>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -170,9 +176,9 @@
     </div>
 
     <div id="LOGIN">
-        <div class="relative flex flex-col justify-center h-screen overflow-hidden">
-            <div class="w-full p-6 m-auto bg-white rounded-lg shadow-md lg:max-w-lg">
-                <h1 class="text-3xl font-semibold text-center text-purple-700">Login</h1>
+        <div class="relative flex flex-col justify-center h-screen overflow-hidden bg-base-100">
+            <div class="w-full p-6 m-auto rounded-lg shadow-md lg:max-w-lg bg-base-200">
+                <h1 class="text-3xl font-semibold text-center text-primary-focus">Log In</h1>
                 <form class="space-y-4">
                     <div>
                         <label class="label">
@@ -187,19 +193,20 @@
                         <input type="password" placeholder="Enter Password"
                             class="w-full input input-bordered input-primary" />
                     </div>
-                    <a href="" class="text-xs text-gray-600 hover:text-blue-600">Forget Password?</a>
+                    <!-- <a href="" class="text-xs text-gray-600 hover:text-blue-600 ml-1">Forgot Password?</a> -->
                     <div>
-                        <button class="btn btn-primary">Login</button>
+                        <button class="btn btn-primary">Log In</button>
                     </div>
+                    <!-- <a href="" class="text-xs text-gray-600 hover:text-blue-600 mr-auto">Don't have an account? Sign up</a> -->
                 </form>
             </div>
         </div>
     </div>
 
     <div id="ADD-USER">
-        <div class="relative flex flex-col justify-center h-screen overflow-hidden">
-            <div class="w-full p-6 m-auto bg-white rounded-lg shadow-md max-w-2xl">
-                <h1 class="m-3 text-3xl font-semibold text-center text-purple-700">Add User</h1>
+        <div class="relative flex flex-col justify-center h-screen overflow-hidden bg-base-100">
+            <div class="w-full p-6 m-auto rounded-lg shadow-md max-w-2xl bg-base-200">
+                <h1 class="m-3 text-3xl font-semibold text-center text-primary-focus">Add User</h1>
                 <form class=" grid grid-cols-2 gap-4">
                     <div>
                         <label class="label">
@@ -273,9 +280,7 @@
                         <td>Blue</td>
                         <td>Blue</td>
                         <td>
-                            <button class="btn btn-primary btn-sm">Details</button>
-                            <button class="btn btn-primary btn-sm">Edit</button>
-                            <button class="btn btn-primary btn-sm">Delete</button>
+                            <button class="btn btn-primary btn-sm mx-[2px]">Details</button>
                         </td>
                     </tr>
                     <!-- row 2 -->
@@ -289,9 +294,7 @@
                         <td>Purple</td>
                         <td>Purple</td>
                         <td>
-                            <button class="btn btn-primary btn-sm">Details</button>
-                            <button class="btn btn-primary btn-sm">Edit</button>
-                            <button class="btn btn-primary btn-sm">Delete</button>
+                            <button class="btn btn-primary btn-sm mx-[2px]">Details</button>
                         </td>
                     </tr>
                     <!-- row 3 -->
@@ -305,10 +308,42 @@
                         <td>Red</td>
                         <td>Red</td>
                         <td>
-                            <button class="btn btn-primary btn-sm">Details</button>
-                            <button class="btn btn-primary btn-sm">Edit</button>
-                            <button class="btn btn-primary btn-sm">Delete</button>
+                            <button class="btn btn-primary btn-sm mx-[2px]">Details</button>
                         </td>
+                    </tr>
+
+                    <tr>
+                        <td>dummy</td>
+                        <td>dummy</td>
+                        <td>dummy</td>
+                        <td>dummy</td>
+                        <td>dummy</td>
+                        <td>dummy</td>
+                        <td>dummy</td>
+                        <td>dummy</td>
+                        <td>dummy</td>
+                    </tr>
+                    <tr>
+                        <td>dummy</td>
+                        <td>dummy</td>
+                        <td>dummy</td>
+                        <td>dummy</td>
+                        <td>dummy</td>
+                        <td>dummy</td>
+                        <td>dummy</td>
+                        <td>dummy</td>
+                        <td>dummy</td>
+                    </tr>
+                    <tr>
+                        <td>dummy</td>
+                        <td>dummy</td>
+                        <td>dummy</td>
+                        <td>dummy</td>
+                        <td>dummy</td>
+                        <td>dummy</td>
+                        <td>dummy</td>
+                        <td>dummy</td>
+                        <td>dummy</td>
                     </tr>
                 </tbody>
             </table>
@@ -316,9 +351,9 @@
     </div>
 
     <div id="PRODUCTS-ADD">
-        <div class="relative flex flex-col justify-center h-screen overflow-hidden">
-            <div class="w-full p-6 m-auto bg-white rounded-lg shadow-md max-w-2xl">
-                <h1 class="m-3 text-3xl font-semibold text-center text-purple-700">Add Product</h1>
+        <div class="relative flex flex-col justify-center h-screen overflow-hidden bg-base-100">
+            <div class="w-full p-6 m-auto rounded-lg shadow-md max-w-2xl bg-base-200">
+                <h1 class="m-3 text-3xl font-semibold text-center text-primary-focus">Add Product</h1>
                 <form class=" grid grid-cols-2 gap-4">
                     <div>
                         <label class="label">
@@ -353,6 +388,7 @@
                         </label>
                         <input type="password" placeholder="Phone Number"
                             class="w-full input input-bordered input-primary" />
+                        <!-- <a href="" class="text-xs ml-1 text-gray-600 hover:text-primary">Want to upload a file instead?</a> -->
                     </div>
                     <div>
                         <label class="label">
@@ -371,9 +407,9 @@
     </div>
 
     <div id="PRODUCTS-EDIT">
-        <div class="relative flex flex-col justify-center h-screen overflow-hidden">
-            <div class="w-full p-6 m-auto bg-white rounded-lg shadow-md max-w-2xl">
-                <h1 class="m-3 text-3xl font-semibold text-center text-purple-700">Edit Product</h1>
+        <div class="relative flex flex-col justify-center h-screen overflow-hidden bg-base-100">
+            <div class="w-full p-6 m-auto rounded-lg shadow-md max-w-2xl bg-base-200">
+                <h1 class="m-3 text-3xl font-semibold text-center text-primary-focus">Edit Product</h1>
                 <form class=" grid grid-cols-2 gap-4">
                     <div>
                         <label class="label">
@@ -408,6 +444,7 @@
                         </label>
                         <input type="password" placeholder="Phone Number"
                             class="w-full input input-bordered input-primary" />
+                        <!-- <a href="" class="text-xs ml-1 text-gray-600 hover:text-primary">Want to upload a file instead?</a> -->
                     </div>
                     <div>
                         <label class="label">
@@ -424,6 +461,18 @@
             </div>
         </div>
     </div>
+
+    <!-- <div id="UPLOAD-IMAGE">
+        <div class="relative flex flex-col justify-center h-screen overflow-hidden">
+            <div class="w-full p-6 m-auto bg-white rounded-lg shadow-md max-w-2xl">
+                <h1 class="m-3 text-3xl font-semibold text-center text-purple-700">Upload Image</h1>
+                <form action="" enctype="multipart/form-data"  method="POST" class="mt-5 mb-2 flex justify-center">
+                    <input type="file" id="image" name="image" class="w-52 hidden"/>
+                    <label for="image" class="btn btn-primary">Upload</label>
+                </form>
+            </div>
+        </div>
+    </div> -->
 </div>
 </body>
 </html>
