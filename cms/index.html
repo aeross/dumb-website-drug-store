@@ -12,7 +12,7 @@
     <div id="the-wrapper-div-that-wraps-everything-so-that-this-returns-a-single-root-element" class="font-mono">
         <nav class="navbar sticky top-0 z-10 p-3 bg-base-200 shadow">
             <div class="navbar-start">
-                <a class="btn btn-ghost normal-case text-3xl font-bold px-6 text-primary-focus">Garage Chemist</a>   
+                <a class="btn btn-ghost text-4xl font-bold px-6"><span class="text-secondary">C</span><span class="text-accent">H</span><span class="text-info">E</span><span class="text-yellow-500">M</span><span class="text-primary">I</span><span class="text-error">S</span><span class="text-success">T</span></a>
             </div>
             <div class="navbar-center">
                 <div class="dropdown dropdown-end">
@@ -30,15 +30,29 @@
                         <li><a>Item 2</a></li>
                     </ul>
                 </div>
-                <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto mx-1 input-sm" />
+                <input type="text" placeholder="Search" class="input input-bordered input-primary w-24 md:w-auto mx-1 input-sm" />
                 <button class="btn btn-ghost btn-circle">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                 </button>
             </div>
     
             <div class="navbar-end">
-                <button class="btn mx-2 btn-primary btn-sm">Log In</button>
-                <button class="btn mx-2 btn-primary btn-sm">Sign Up</button>
+                <!-- If not logged in -->
+                <!-- <button class="btn mx-2 btn-primary btn-sm">Log In</button>
+                <button class="btn mx-2 btn-primary btn-sm">Sign Up</button> -->
+                <!-- If logged in as admin -->
+                <!-- <div class="tooltip tooltip-bottom" data-tip="You're logged in as admin.">
+                    <label tabindex="0" class="btn btn-circle avatar pointer-events-none">
+                        <div class="w-6 bg-warning rounded-full border-2 border-primary"></div>
+                    </label>
+                </div> -->
+                <!-- If logged in as user -->
+                <div class="tooltip tooltip-bottom" data-tip="You're logged in as user.">
+                    <label tabindex="0" class="btn btn-circle avatar pointer-events-none">
+                        <div class="w-6 rounded-full bg-accent border-2 border-primary"></div>
+                    </label>
+                </div>
+                <!-- If logged in -->
                 <button class="btn mx-2 btn-primary btn-sm">Log Out</button>
 
                 <div class="drawer drawer-end w-12">
@@ -51,6 +65,7 @@
                     <div class="drawer-side">
                         <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
                         <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+                            <li class="disabled text-2xl mb-4"><a>Username</a></li>
                             <li><a>Categories</a></li>
                             <li><a>Products</a></li>
                         </ul>
@@ -135,7 +150,7 @@
             </div>
         </div>
     
-        <div id="PRODUCTS-MAIN" class="hidden">
+        <div id="PRODUCTS-MAIN" class="">
             <div class="overflow-x-auto my-6">
                 <h1 class="my-3 mx-3 text-2xl font-semibold text-primary-focus">Products</h1>
                 <table class="table table-zebra">
@@ -264,7 +279,7 @@
             </main>
         </div>
     
-        <div id="PRODUCTS-ADD" class="hidden">
+        <div id="PRODUCTS-ADD" class="">
             <div class="relative flex flex-col justify-center h-[85dvh] my-5 overflow-hidden bg-base-100">
                 <div class="w-full p-6 m-auto rounded-lg shadow-md max-w-2xl bg-base-200">
                     <h1 class="m-3 text-3xl font-semibold text-center text-primary-focus">Add Product</h1>
@@ -320,7 +335,7 @@
             </div>
         </div>
     
-        <div id="PRODUCTS-EDIT" class="hidden">
+        <div id="PRODUCTS-EDIT" class="">
             <div class="relative flex flex-col justify-center h-[85dvh] my-5 overflow-hidden bg-base-100">
                 <div class="w-full p-6 m-auto rounded-lg shadow-md max-w-2xl bg-base-200">
                     <h1 class="m-3 text-3xl font-semibold text-center text-primary-focus">Edit Product</h1>
@@ -376,7 +391,7 @@
             </div>
         </div>
     
-        <div id="CATEGORIES" class="hidden">
+        <div id="CATEGORIES" class="">
             <div class="overflow-x-auto my-6">
                 <h1 class="my-3 mx-3 text-2xl font-semibold text-primary-focus">Categories</h1>
                 <table class="table table-zebra">
