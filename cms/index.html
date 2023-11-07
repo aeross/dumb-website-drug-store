@@ -10,24 +10,8 @@
 </head>
 <body>
     <div id="the-wrapper-div-that-wraps-everything-so-that-this-returns-a-single-root-element" class="font-mono">
-        <nav class="navbar fixed top-0 z-10 p-3 bg-base-200 shadow">
+        <nav class="navbar sticky top-0 z-10 p-3 bg-base-200 shadow">
             <div class="navbar-start">
-                <!-- <div class="drawer">
-                    <input id="my-drawer" type="checkbox" class="drawer-toggle" />
-                    <div class="drawer-content">
-                        <label for="my-drawer" tabindex="0" class="btn btn-ghost btn-circle">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
-                        </label>
-                    </div> 
-                    <div class="drawer-side z-10">
-                        <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-                        <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-                            <li><a>Category 1</a></li>
-                            <li><a>Category 2</a></li>
-                        </ul>
-                    </div>
-                </div> -->
-                
                 <a class="btn btn-ghost normal-case text-3xl font-bold px-6 text-primary-focus">Garage Chemist</a>   
             </div>
             <div class="navbar-center">
@@ -55,11 +39,28 @@
             <div class="navbar-end">
                 <button class="btn mx-2 btn-primary btn-sm">Log In</button>
                 <button class="btn mx-2 btn-primary btn-sm">Sign Up</button>
+                <button class="btn mx-2 btn-primary btn-sm">Log Out</button>
+
+                <div class="drawer drawer-end w-12">
+                    <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
+                    <div class="drawer-content">
+                        <label for="my-drawer-4" tabindex="0" class="btn btn-ghost btn-circle">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        </label>
+                    </div> 
+                    <div class="drawer-side">
+                        <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
+                        <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+                            <li><a>Categories</a></li>
+                            <li><a>Products</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </nav>
 
-        <div id="LOGIN">
-            <div class="relative flex flex-col justify-center h-screen overflow-hidden bg-base-100">
+        <div id="LOGIN" class="hidden">
+            <div class="relative flex flex-col justify-center h-[85dvh] overflow-hidden bg-base-100">
                 <div class="w-full p-6 m-auto rounded-lg shadow-md lg:max-w-lg bg-base-200">
                     <h1 class="text-3xl font-semibold text-center text-primary-focus">Log In</h1>
                     <form class="space-y-4">
@@ -86,8 +87,8 @@
             </div>
         </div>
     
-        <div id="ADD-USER">
-            <div class="relative flex flex-col justify-center h-screen overflow-hidden bg-base-100">
+        <div id="ADD-USER" class="hidden">
+            <div class="relative flex flex-col justify-center h-[85dvh] my-5 overflow-hidden bg-base-100">
                 <div class="w-full p-6 m-auto rounded-lg shadow-md max-w-2xl bg-base-200">
                     <h1 class="m-3 text-3xl font-semibold text-center text-primary-focus">Add User</h1>
                     <form class=" grid grid-cols-2 gap-4">
@@ -134,8 +135,9 @@
             </div>
         </div>
     
-        <div id="PRODUCTS-MAIN">
-            <div class="overflow-x-auto my-10">
+        <div id="PRODUCTS-MAIN" class="hidden">
+            <div class="overflow-x-auto my-6">
+                <h1 class="my-3 mx-3 text-2xl font-semibold text-primary-focus">Products</h1>
                 <table class="table table-zebra">
                     <!-- head -->
                     <thead>
@@ -232,9 +234,38 @@
                 </table>
             </div>
         </div>
+
+        <div id="PRODUCTS-DETAIL" class="">
+            <main>
+                <div class="hero bg-base-100 min-h-[78dvh] my-6">
+                    <div class="hero-content flex-col lg:flex-row">
+                        <img src="https://ik.imagekit.io/aeross/cat.jpg?updatedAt=1699260555605" class="max-w-sm rounded-lg shadow-2xl" />
+                        <div>
+                            <div class="texts">
+                                <h1 class="text-5xl font-bold text-primary-focus">Green Ash</h1>
+                                <div class="py-6">
+                                    <p>This medication is known to relieve pain and reduce inflammation.</p>
+                                    <p>Stock: 90</p>
+                                    <p>Price: 261</p>
+                                </div>
+                            </div>
+                            <div class="buttons">
+                                <button class="btn btn-primary">Edit</button>
+                                <button class="btn btn-primary">Delete</button>
+                            </div>
+                        
+                            <form action="" enctype="multipart/form-data"  method="POST" class="my-1">
+                                <input type="file" id="image" name="image" class="w-52 hidden"/>
+                                <label for="image" class="text-xs ml-1 text-gray-600 hover:text-primary-focus hover:cursor-pointer">Upload Image</label>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
     
-        <div id="PRODUCTS-ADD">
-            <div class="relative flex flex-col justify-center h-screen overflow-hidden bg-base-100">
+        <div id="PRODUCTS-ADD" class="hidden">
+            <div class="relative flex flex-col justify-center h-[85dvh] my-5 overflow-hidden bg-base-100">
                 <div class="w-full p-6 m-auto rounded-lg shadow-md max-w-2xl bg-base-200">
                     <h1 class="m-3 text-3xl font-semibold text-center text-primary-focus">Add Product</h1>
                     <form class=" grid grid-cols-2 gap-4">
@@ -289,8 +320,8 @@
             </div>
         </div>
     
-        <div id="PRODUCTS-EDIT">
-            <div class="relative flex flex-col justify-center h-screen overflow-hidden bg-base-100">
+        <div id="PRODUCTS-EDIT" class="hidden">
+            <div class="relative flex flex-col justify-center h-[85dvh] my-5 overflow-hidden bg-base-100">
                 <div class="w-full p-6 m-auto rounded-lg shadow-md max-w-2xl bg-base-200">
                     <h1 class="m-3 text-3xl font-semibold text-center text-primary-focus">Edit Product</h1>
                     <form class=" grid grid-cols-2 gap-4">
@@ -345,21 +376,15 @@
             </div>
         </div>
     
-        <div id="PRODUCTS-MAIN">
-            <div class="overflow-x-auto my-10">
+        <div id="CATEGORIES" class="hidden">
+            <div class="overflow-x-auto my-6">
+                <h1 class="my-3 mx-3 text-2xl font-semibold text-primary-focus">Categories</h1>
                 <table class="table table-zebra">
                     <!-- head -->
                     <thead>
                         <tr>
                             <th></th>
                             <th>Name</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th>Stock</th>
-                            <th>Image URL</th>
-                            <th>Category</th>
-                            <th>User</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -367,77 +392,53 @@
                         <tr>
                             <th>1</th>
                             <td>Cy Ganderton</td>
-                            <td>Quality Control Specialist</td>
-                            <td>Blue</td>
-                            <td>Cy Ganderton</td>
-                            <td>Quality Control Specialist</td>
-                            <td>Blue</td>
-                            <td>Blue</td>
                             <td>
-                                <button class="btn btn-primary btn-sm mx-[2px]">Details</button>
+                                <button class="btn btn-primary btn-sm mx-[2px]">Edit</button>
+                                <button class="btn btn-primary btn-sm mx-[2px]">Delete</button>
                             </td>
                         </tr>
                         <!-- row 2 -->
                         <tr>
                             <th>2</th>
                             <td>Hart Hagerty</td>
-                            <td>Desktop Support Technician</td>
-                            <td>Purple</td>
-                            <td>Hart Hagerty</td>
-                            <td>Desktop Support Technician</td>
-                            <td>Purple</td>
-                            <td>Purple</td>
                             <td>
-                                <button class="btn btn-primary btn-sm mx-[2px]">Details</button>
+                                <button class="btn btn-primary btn-sm mx-[2px]">Edit</button>
+                                <button class="btn btn-primary btn-sm mx-[2px]">Delete</button>
                             </td>
                         </tr>
                         <!-- row 3 -->
                         <tr>
                             <th>3</th>
                             <td>Brice Swyre</td>
-                            <td>Tax Accountant</td>
-                            <td>Red</td>
-                            <td>Brice Swyre</td>
-                            <td>Tax Accountant</td>
-                            <td>Red</td>
-                            <td>Red</td>
                             <td>
-                                <button class="btn btn-primary btn-sm mx-[2px]">Details</button>
+                                <button class="btn btn-primary btn-sm mx-[2px]">Edit</button>
+                                <button class="btn btn-primary btn-sm mx-[2px]">Delete</button>
                             </td>
                         </tr>
     
                         <tr>
+                            <td>4</td>
                             <td>dummy</td>
-                            <td>dummy</td>
-                            <td>dummy</td>
-                            <td>dummy</td>
-                            <td>dummy</td>
-                            <td>dummy</td>
-                            <td>dummy</td>
-                            <td>dummy</td>
-                            <td>dummy</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm mx-[2px]">Edit</button>
+                                <button class="btn btn-primary btn-sm mx-[2px]">Delete</button>
+                            </td>
                         </tr>
                         <tr>
+                            <td>5</td>
                             <td>dummy</td>
-                            <td>dummy</td>
-                            <td>dummy</td>
-                            <td>dummy</td>
-                            <td>dummy</td>
-                            <td>dummy</td>
-                            <td>dummy</td>
-                            <td>dummy</td>
-                            <td>dummy</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm mx-[2px]">Edit</button>
+                                <button class="btn btn-primary btn-sm mx-[2px]">Delete</button>
+                            </td>
                         </tr>
                         <tr>
+                            <td>6</td>
                             <td>dummy</td>
-                            <td>dummy</td>
-                            <td>dummy</td>
-                            <td>dummy</td>
-                            <td>dummy</td>
-                            <td>dummy</td>
-                            <td>dummy</td>
-                            <td>dummy</td>
-                            <td>dummy</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm mx-[2px]">Edit</button>
+                                <button class="btn btn-primary btn-sm mx-[2px]">Delete</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
