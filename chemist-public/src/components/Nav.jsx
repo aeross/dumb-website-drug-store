@@ -13,7 +13,7 @@ export default function Nav() {
         </a>
     </div>
     <div className="navbar-center">
-        <div className="dropdown">
+        {/* <div className="dropdown">
             <label tabIndex={0} className="btn mx-2 btn-primary btn-sm">Filter</label>
             <form method="get" className="dropdown-content z-[1] menu px-3 m-1 shadow bg-base-100 rounded-box w-64">
                 <div className="flex items-center justify-between">
@@ -73,7 +73,7 @@ export default function Nav() {
                 />
             </svg>
         </button>
-        </form>
+        </form> */}
     </div>
     <div className="navbar-end">
         <button className="btn mx-2 btn-primary btn-sm">Log In</button>
