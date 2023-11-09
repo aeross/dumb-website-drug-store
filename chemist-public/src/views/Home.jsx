@@ -4,13 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 export default function Home({ url }) {
-    // products
     const [products, setProducts] = useState([]);
-    const [count, setCount] = useState(0);
     const [currPage, setCurrPage] = useState([]);
     const [totalPage, setTotalPage] = useState([]);
-    const [limit, setLimit] = useState(0);
     const [search, setSearch] = useState("");
+    const [sort, setSort] = useState("");
     const [query, setQuery] = useState({
         page: "",
         search: "",
@@ -19,14 +17,13 @@ export default function Home({ url }) {
         filter: ""
     });
 
+    // init
     useEffect(() => {
         async function fetchProducts() {
             const { data } = await axios.get(`${url}pub/product`);
             setProducts(data.products);
-            setCount(data.count);
             setCurrPage(data.currPage);
             setTotalPage(data.totalPage);
-            setLimit(data.limit);
         }
         fetchProducts();
     }, [])
@@ -43,10 +40,8 @@ export default function Home({ url }) {
         
         const { data } = await axios.get(newURL);
         setProducts(data.products);
-        setCount(data.count);
         setCurrPage(data.currPage);
         setTotalPage(data.totalPage);
-        setLimit(data.limit);
         setQuery(newQuery);
     }
     
@@ -67,8 +62,18 @@ export default function Home({ url }) {
     }
     function applySearch(event) {
         event.preventDefault();
-        console.log(query, search, "<<<");
         let newQuery = { ...query, search: search }
+        updateQuery(newQuery);
+    }
+
+    // sort
+    function sortOnChange(event) {
+        let newSort = event.target.value;
+        setSort(newSort);
+    }
+    function applySort(event) {
+        event.preventDefault();
+        let newQuery = { ...query, sort: sort }
         updateQuery(newQuery);
     }
 
@@ -104,14 +109,14 @@ export default function Home({ url }) {
                     <form method="get" className="dropdown-content z-[1] menu px-3 m-1 shadow bg-base-100 rounded-box w-64">
                         <div className="flex items-center justify-between">
                             <label htmlFor="desc">Newest</label>
-                            <input id="desc" name='sort' value="-createdAt" type="radio" className="m-2 h-7 w-7 rounded hover:cursor-pointer accent-primary" />
+                            <input onChange={sortOnChange} id="desc" name='sort' value="-createdAt" type="radio" className="m-2 h-7 w-7 rounded hover:cursor-pointer accent-primary" />
                         </div>
                         <div className="flex items-center justify-between">
                             <label htmlFor="asc">Oldest</label>
-                            <input id="asc" name='sort' value="createdAt" type="radio" className="m-2 h-7 w-7 rounded hover:cursor-pointer accent-primary" />
+                            <input onChange={sortOnChange} id="asc" name='sort' value="createdAt" type="radio" className="m-2 h-7 w-7 rounded hover:cursor-pointer accent-primary" />
                         </div>
                         <div className="flex items-center justify-center">
-                            <button className="btn btn-sm btn-primary h-2 w-16" type="submit">Apply</button>
+                            <button onClick={applySort} className="btn btn-sm btn-primary h-2 w-16" type="submit">Apply</button>
                         </div>
                     </form>
                 </div>
