@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react"
 import axios from "axios";
+import TrProducts from "../components/TrProducts";
 
 export default function Products({ url }) {
 
@@ -26,7 +27,7 @@ export default function Products({ url }) {
             {/* head */}
             <thead>
             <tr>
-                <th />
+                <th>id</th>
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
@@ -39,53 +40,9 @@ export default function Products({ url }) {
             </thead>
             <tbody>
                 {/* row 1 */}
-                <tr>
-                    <th>1</th>
-                    <td>Cy Ganderton</td>
-                    <td>Quality Control Specialist</td>
-                    <td>Blue</td>
-                    <td>Cy Ganderton</td>
-                    <td>Quality Control Specialist</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                    <td>
-                    <button className="btn btn-primary btn-sm mx-[2px]">
-                        Details
-                    </button>
-                    </td>
-                </tr>
-                {/* row 2 */}
-                <tr>
-                    <th>2</th>
-                    <td>Hart Hagerty</td>
-                    <td>Desktop Support Technician</td>
-                    <td>Purple</td>
-                    <td>Hart Hagerty</td>
-                    <td>Desktop Support Technician</td>
-                    <td>Purple</td>
-                    <td>Purple</td>
-                    <td>
-                    <button className="btn btn-primary btn-sm mx-[2px]">
-                        Details
-                    </button>
-                    </td>
-                </tr>
-                {/* row 3 */}
-                <tr>
-                    <th>3</th>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Red</td>
-                    <td>
-                    <button className="btn btn-primary btn-sm mx-[2px]">
-                        Details
-                    </button>
-                    </td>
-                </tr>
+                { products.map(product => {
+                    return <TrProducts product={product} />
+                }) }
             </tbody>
         </table>
     </div>
