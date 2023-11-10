@@ -33,8 +33,10 @@ export default function ProductsDetail({ url, axios }) {
     }, [])
 
     // patch image
+    const [uploading, setUploading] = useState(false);
     function patchImage(event) {
         event.preventDefault();
+        setUploading(true);
         let file = event.target.files[0];
         let formData = new FormData();
 
@@ -56,6 +58,8 @@ export default function ProductsDetail({ url, axios }) {
                 if (error.response.status === 404) navigate("/product");
                 if (error.response.status === 403) navigate("/product");
                 if (error.response.status === 401) navigate("/login");
+            } finally {
+                setUploading(false);
             }
         })()
     }
@@ -83,55 +87,59 @@ export default function ProductsDetail({ url, axios }) {
         del();
     }
 
+    // render page based on whether it's loading or not
+    function renderPage() {
+        if (uploading) return <h1>Uploading...</h1>
+        if (!uploading) return (
+            <div id="PRODUCTS-DETAIL">
+                <main>
+                    <div className="hero bg-base-100 min-h-[78dvh] my-6">
+                    <div className="hero-content flex-col lg:flex-row">
+                        <img
+                        src={product.imgUrl}
+                        className="max-w-sm rounded-lg shadow-2xl"
+                        />
+                        <div>
+                        <div className="texts">
+                            <h1 className="text-5xl font-bold text-primary-focus">
+                            {product.name}
+                            </h1>
+                            <div className="py-6">
+                            <p>{product.description}</p>
+                            <p>Stock: {product.stock}</p>
+                            <p>Price: {product.price}</p>
+                            </div>
+                        </div>
+                        <div className="buttons">
+                            <Link to={`/product/edit/${product.id}`}><button className="btn btn-primary mr-2">Edit</button></Link>
+                            <button onClick={deleteOnClick} className="btn btn-primary">Delete</button>
+                        </div>
+                        <form
+                            action=""
+                            encType="multipart/form-data"
+                            method="POST"
+                            className="my-1"
+                        >
+                            <input
+                                onChange={patchImage}
+                                type="file"
+                                id="image"
+                                name="image"
+                                className="w-52 hidden"
+                            />
+                            <label
+                                htmlFor="image"
+                                className="text-xs ml-1 text-gray-600 hover:text-primary-focus hover:cursor-pointer"
+                            >
+                                Upload Image
+                            </label>
+                        </form>
+                        </div>
+                    </div>
+                    </div>
+                </main>
+            </div>)
+    }
 
-    return (<>
-<div id="PRODUCTS-DETAIL">
-<main>
-    <div className="hero bg-base-100 min-h-[78dvh] my-6">
-    <div className="hero-content flex-col lg:flex-row">
-        <img
-        src={product.imgUrl}
-        className="max-w-sm rounded-lg shadow-2xl"
-        />
-        <div>
-        <div className="texts">
-            <h1 className="text-5xl font-bold text-primary-focus">
-            {product.name}
-            </h1>
-            <div className="py-6">
-            <p>{product.description}</p>
-            <p>Stock: {product.stock}</p>
-            <p>Price: {product.price}</p>
-            </div>
-        </div>
-        <div className="buttons">
-            <Link to={`/product/edit/${product.id}`}><button className="btn btn-primary mr-2">Edit</button></Link>
-            <button onClick={deleteOnClick} className="btn btn-primary">Delete</button>
-        </div>
-        <form
-            action=""
-            encType="multipart/form-data"
-            method="POST"
-            className="my-1"
-        >
-            <input
-                onChange={patchImage}
-                type="file"
-                id="image"
-                name="image"
-                className="w-52 hidden"
-            />
-            <label
-                htmlFor="image"
-                className="text-xs ml-1 text-gray-600 hover:text-primary-focus hover:cursor-pointer"
-            >
-                Upload Image
-            </label>
-        </form>
-        </div>
-    </div>
-    </div>
-</main>
-</div>
-    </>)
+    return renderPage();
 }

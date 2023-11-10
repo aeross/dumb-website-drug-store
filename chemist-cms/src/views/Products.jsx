@@ -1,23 +1,46 @@
 import { useEffect } from "react";
 import { useState } from "react"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import TrProducts from "../components/TrProducts";
+import Swal from "sweetalert2";
 
 export default function Products({ url, axios }) {
     const token = localStorage.getItem("accessToken");
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
 
+    // fetch products
     const [products, setProducts] = useState([]);
     useEffect(() => {
         async function fetchProducts() {
-            let { data } = await axios.get(`${url}product`, { 
-                headers: { Authorization: `Bearer ${token}` } 
-            });
-            setProducts(data.products);
+            try {
+                setLoading(true);
+                let { data } = await axios.get(`${url}product`, { 
+                    headers: { Authorization: `Bearer ${token}` } 
+                });
+                setProducts(data.products);
+            } catch (error) {
+                console.log(error);
+                Swal.fire({
+                    icon: "error",
+                    title: error,
+                    text: error.response.data.message,
+                });
+                if (error.response.status === 404) navigate("/product");
+                if (error.response.status === 403) navigate("/product");
+                if (error.response.status === 401) navigate("/login");
+            } finally {
+                setLoading(false);
+            }
         }
         fetchProducts();
     }, [])
 
-    return (<>
+    
+    // render page based on whether it's loading or not
+    function renderPage() {
+        if (loading) return <h1>Loading...</h1>
+        if (!loading) return (
 <div id="PRODUCTS-MAIN">
     <div className="overflow-x-auto my-6">
         <div className="flex justify-between items-center">
@@ -48,5 +71,8 @@ export default function Products({ url, axios }) {
         </table>
     </div>
 </div>
-    </>)
+        )
+    }
+
+    return renderPage();
 }

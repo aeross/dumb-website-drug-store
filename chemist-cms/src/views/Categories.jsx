@@ -28,10 +28,11 @@ export default function Categories({ url, axios }) {
             <h1 className="my-3 mx-3 text-2xl font-semibold text-primary-focus">
                 Categories
             </h1>
-            <Link to="/category/add"><button className="btn btn-primary btn-sm mx-3">Add</button></Link>
+            {/* Add not required in this challenge, so i'm turning it off */}
+            {/* <Link to="/category/add"><button className="btn btn-primary btn-sm mx-3">Add</button></Link> */}
         </div>
+        
         <table className="table table-zebra">
-            {/* head */}
             <thead>
             <tr>
                 <th>id</th>

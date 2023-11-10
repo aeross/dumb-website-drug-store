@@ -2,16 +2,15 @@ import { createBrowserRouter, redirect } from "react-router-dom";
 import axios from "axios";
 
 import Login from "../views/Login";
-import ProductsParent from "../views/ProductsParent";
+import AddUser from "../views/AddUser";
+import Parent from "../views/Parent";
 import Products from "../views/Products";
 import ProductsDetail from "../views/ProductsDetail";
 import ProductsAdd from "../views/ProductsAdd";
 import ProductsEdit from "../views/ProductsEdit";
 import Categories from "../views/Categories";
-import CategoriesParent from "../views/CategoriesParent";
 import CategoriesEdit from "../views/CategoriesEdit";
 import CategoriesAdd from "../views/CategoriesAdd";
-import AddUser from "../views/AddUser";
 
 const SERVER_URL = "http://35.247.184.191/";
 
@@ -26,7 +25,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/product",
-        element: <ProductsParent />,
+        element: <Parent />,
         children: [
             { path: "", element: <Products url={SERVER_URL} axios={axios} /> },
             { path: ":id", element: <ProductsDetail url={SERVER_URL} axios={axios} /> },
@@ -39,7 +38,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/category",
-        element: <CategoriesParent />,
+        element: <Parent />,
         children: [
             { path: "", element: <Categories url={SERVER_URL} axios={axios} /> },
             { path: "add", element: <CategoriesAdd url={SERVER_URL} axios={axios} /> },
@@ -53,7 +52,7 @@ const router = createBrowserRouter([
     // "/" will redirect to home page
     {
         path: "/",
-        loader: () => redirect("/pub/product")
+        loader: () => redirect("/product")
     },
 
     // lost URLs
