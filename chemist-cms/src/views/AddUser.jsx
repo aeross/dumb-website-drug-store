@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import Nav from "../components/Nav";
 
 export default function AddUser({ url, axios }) {
     const token = `Bearer ${localStorage.getItem("accessToken")}`;
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
@@ -10,15 +15,35 @@ export default function AddUser({ url, axios }) {
 
     async function handleSubmit(event) {
         event.preventDefault();
-        await axios.post(`${url}add-user`, { email, password, username, phoneNum, address }, {
-            headers: { Authorization: token }
-        })
-        // redirect
+
+        try {
+            const { data } = await axios.post(`${url}add-user`, { email, password, username, phoneNum, address }, {
+                headers: { Authorization: token }
+            });
+            console.log(data);
+            Swal.fire({
+                title: "Success",
+                text: `${data.newUser.username} has been added as staff`
+            })
+        } catch (error) {
+            console.log(error);
+            Swal.fire({
+                icon: "error",
+                title: error,
+                text: error.response.data.message,
+            });
+            if (error.response.status === 404) navigate("/product");
+            if (error.response.status === 403) navigate("/product");
+            if (error.response.status === 401) navigate("/login");
+        }
+        
     }
     
 
     return (
 <>
+    <Nav />
+
     <div className="relative flex flex-col justify-center h-[85dvh] my-5 overflow-hidden bg-base-100">
         <div className="w-full p-6 m-auto rounded-lg shadow-md max-w-2xl bg-base-200">
             <h1 className="m-3 text-3xl font-semibold text-center text-primary-focus">

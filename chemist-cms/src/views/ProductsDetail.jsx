@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom"
+import Swal from "sweetalert2";
 
 export default function ProductsDetail({ url, axios }) {
     const { id } = useParams();
@@ -7,31 +8,77 @@ export default function ProductsDetail({ url, axios }) {
     // access token
     const token = `Bearer ${localStorage.getItem("accessToken")}`;
 
-    // patch image
-    const [file, setFile] = useState();
-    // function uploadFile(event) {
-    //     event.preventDefault();
-    // }
-    
     // fetch data
     const [product, setProduct] = useState({});
     useEffect(() => {
         async function fetchProduct() {
-            const { data } = await axios.get(`${url}product/${id}`, { 
-                headers: { Authorization: token } 
-            });
-            setProduct(data.foundProduct);
+            try {
+                const { data } = await axios.get(`${url}product/${id}`, { 
+                    headers: { Authorization: token } 
+                });
+                setProduct(data.foundProduct);   
+            } catch (error) {
+                console.log(error);
+                Swal.fire({
+                    icon: "error",
+                    title: error,
+                    text: error.response.data.message,
+                });
+                if (error.response.status === 404) navigate("/product");
+                if (error.response.status === 403) navigate("/product");
+                if (error.response.status === 401) navigate("/login");
+            }
         }
         fetchProduct();
     }, [])
 
+    // patch image
+    function patchImage(event) {
+        event.preventDefault();
+        let file = event.target.files[0];
+        let formData = new FormData();
+
+        formData.append("image", file);
+
+        (async () => {
+            try {
+                await axios.patch(`${url}product/${product.id}`, formData, {
+                    headers: { Authorization: token }
+                });
+                window.location.reload();
+            } catch (error) {
+                console.log(error);
+                Swal.fire({
+                    icon: "error",
+                    title: error,
+                    text: error.response.data.message,
+                });
+                if (error.response.status === 404) navigate("/product");
+                if (error.response.status === 403) navigate("/product");
+                if (error.response.status === 401) navigate("/login");
+            }
+        })()
+    }
+
     // delete data
     function deleteOnClick() {
         async function del() {
-            await axios.delete(`${url}product/${id}`, {
-                headers: { Authorization: token }
-            });
-            // redirect
+            try {
+                await axios.delete(`${url}product/${id}`, {
+                    headers: { Authorization: token }
+                });
+                navigate("/product");
+            } catch (error) {
+                console.log(error);
+                Swal.fire({
+                    icon: "error",
+                    title: error,
+                    text: error.response.data.message,
+                });
+                if (error.response.status === 404) navigate("/product");
+                if (error.response.status === 403) navigate("/product");
+                if (error.response.status === 401) navigate("/login");
+            }
         }
         del();
     }
@@ -68,22 +115,7 @@ export default function ProductsDetail({ url, axios }) {
             className="my-1"
         >
             <input
-                onChange={ (event) => {
-                    event.preventDefault();
-                    let file = event.target.files[0];
-                    let formData = new FormData();
-
-                    formData.append("image", file);
-
-                    (async () => {
-                        await axios.patch(`${url}product/${product.id}`, formData, {
-                            headers: { Authorization: token }
-                        });
-                    })()
-
-                    // trigger reload after everything's done
-                    // navigate(`/product/${product.id}`);
-                } }
+                onChange={patchImage}
                 type="file"
                 id="image"
                 name="image"

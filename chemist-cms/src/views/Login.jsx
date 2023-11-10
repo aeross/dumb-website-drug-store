@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import ErrorDisp from '../components/ErrorDisp';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 export default function Login({ url, axios }) {
+    const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -19,10 +21,17 @@ export default function Login({ url, axios }) {
         try {
             let { data } = await axios.post(`${url}login`, { username, password });
             localStorage.setItem("accessToken", data.accessToken);
+            navigate("/product");
         } catch (error) {
-            if (error.response.status === 401 || error.response.status === 400) {
-                setErrorMessage(error.response.data.message);
-            }
+            console.log(error);
+            Swal.fire({
+                icon: "error",
+                title: error,
+                text: error.response.data.message,
+            });
+            if (error.response.status === 404) navigate("/product");
+            if (error.response.status === 403) navigate("/product");
+            if (error.response.status === 401) navigate("/login");
         }
     }
 
@@ -32,9 +41,6 @@ export default function Login({ url, axios }) {
                 <h1 className="text-3xl font-semibold text-center text-primary-focus">
                     Log In
                 </h1>
-
-                {/* error messages */}
-                { errorMessage && <ErrorDisp msg={errorMessage} /> }
 
                 <form className="space-y-4">
                 <div>

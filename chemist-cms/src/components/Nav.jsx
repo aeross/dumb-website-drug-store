@@ -1,12 +1,13 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Nav() {
-    // index 0 => current state, read only
-    // index 1 => function to alter current state
-    const [role, setRole] = useState("admin");
+    const navigate = useNavigate();
 
-
+    function logOutOnClick() {
+        localStorage.setItem("accessToken", null);
+        navigate("/login");
+    }
 
     return (
 <>
@@ -50,6 +51,7 @@ export default function Nav() {
             </>
         )} */}
         <Link to="/add-user"><button className="btn mx-2 btn-primary btn-sm">Add User</button></Link>
+        <button onClick={logOutOnClick} className="btn mx-2 btn-primary btn-sm">Log Out</button>
         <div className="drawer drawer-end w-12">
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content">
@@ -80,9 +82,6 @@ export default function Nav() {
                 className="drawer-overlay"
                 />
                 <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-                <li className="disabled text-2xl mb-4">
-                    <a>Username</a>
-                </li>
                 <li>
                     <Link to="/category">Categories</Link>
                 </li>

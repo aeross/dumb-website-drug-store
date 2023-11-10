@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react"
 import ProductsForm from "../components/ProductsForm";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
 
 export default function ProductsEdit({ url, axios }) {
+    const navigate = useNavigate();
+
     // access token
     const token = localStorage.getItem("accessToken");
 
@@ -16,15 +19,27 @@ export default function ProductsEdit({ url, axios }) {
     const [categoryId, setCategoryId] = useState(0);
     useEffect(() => {
         async function fetchProduct() {
-            const { data } = await axios.get(`${url}product/${id}`, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            setName(data.foundProduct.name);
-            setDescription(data.foundProduct.description);
-            setPrice(data.foundProduct.price);
-            setStock(data.foundProduct.stock);
-            setImgUrl(data.foundProduct.imgUrl);
-            setCategoryId(data.foundProduct.categoryId);
+            try {
+                const { data } = await axios.get(`${url}product/${id}`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                setName(data.foundProduct.name);
+                setDescription(data.foundProduct.description);
+                setPrice(data.foundProduct.price);
+                setStock(data.foundProduct.stock);
+                setImgUrl(data.foundProduct.imgUrl);
+                setCategoryId(data.foundProduct.categoryId);
+            } catch (error) {
+                console.log(error);
+                Swal.fire({
+                    icon: "error",
+                    title: error,
+                    text: error.response.data.message,
+                });
+                if (error.response.status === 404) navigate("/product");
+                if (error.response.status === 403) navigate("/product");
+                if (error.response.status === 401) navigate("/login");
+            }
         }
         fetchProduct();
     }, [])
@@ -51,10 +66,23 @@ export default function ProductsEdit({ url, axios }) {
     async function handleSubmit(event) {
         event.preventDefault();
         const dataToBeAdded = { name, description, price, stock, imgUrl, categoryId };
-        const { data } = await axios.put(`${url}product/${id}`, dataToBeAdded, {
-            headers: { Authorization: `Bearer ${token}` }
-        });
-        // redirect
+        try {
+            await axios.put(`${url}product/${id}`, dataToBeAdded, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            // redirect
+            navigate(`/product/${id}`);
+        } catch (error) {
+            console.log(error);
+            Swal.fire({
+                icon: "error",
+                title: error,
+                text: error.response.data.message,
+            });
+            if (error.response.status === 404) navigate("/product");
+            if (error.response.status === 403) navigate("/product");
+            if (error.response.status === 401) navigate("/login");
+        }
     }
 
     return (<>

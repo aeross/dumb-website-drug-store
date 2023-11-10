@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import ProductsForm from "../components/ProductsForm";
 import { redirect, useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
 
 export default function ProductsAdd({ url, axios }) {
     // access token
@@ -37,11 +38,24 @@ export default function ProductsAdd({ url, axios }) {
     async function handleSubmit(event) {
         event.preventDefault();
         const dataToBeAdded = { name, description, price, stock, imgUrl, categoryId };
-        const { data } = await axios.post(`${url}product`, dataToBeAdded, {
-            headers: { Authorization: `Bearer ${token}` }
-        });
-        // redirect
-        navigate("/product");
+
+        try {
+            const { data } = await axios.post(`${url}product`, dataToBeAdded, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            // redirect
+            navigate("/product");
+        } catch (error) {
+            console.log(error);
+            Swal.fire({
+                icon: "error",
+                title: error,
+                text: error.response.data.message,
+            });
+            if (error.response.status === 404) navigate("/product");
+            if (error.response.status === 403) navigate("/product");
+            if (error.response.status === 401) navigate("/login");
+        }
     }
 
     return (<>
