@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 export default function ProductsDetail({ url, axios }) {
     const { id } = useParams();
@@ -39,7 +39,7 @@ export default function ProductsDetail({ url, axios }) {
             </div>
         </div>
         <div className="buttons">
-            <button className="btn btn-primary mr-2">Edit</button>
+            <Link to={`/product/edit/${product.id}`}><button className="btn btn-primary mr-2">Edit</button></Link>
             <button className="btn btn-primary">Delete</button>
         </div>
         <form

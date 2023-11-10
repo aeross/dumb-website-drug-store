@@ -11,7 +11,7 @@ export default function ProductsAdd({ url, axios }) {
     const [price, setPrice] = useState("");
     const [stock, setStock] = useState("");
     const [imgUrl, setImgUrl] = useState("");
-    const [category, setCategory] = useState("");
+    const [category, setCategory] = useState(1);
     function nameOnChange(event) {
         setName(event.target.value);
     }
@@ -48,6 +48,9 @@ export default function ProductsAdd({ url, axios }) {
                 Add Product
             </h1>
             <ProductsForm 
+                url={url}
+                axios={axios}
+                initialState={{ name, description, price, stock, imgUrl, category }}
                 nameOnChange={nameOnChange}
                 descriptionOnChange={descriptionOnChange}
                 priceOnChange={priceOnChange}
