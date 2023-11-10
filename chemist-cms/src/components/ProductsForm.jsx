@@ -2,11 +2,6 @@ export default function ProductsForm(props) {
     const { nameOnChange, descriptionOnChange, priceOnChange, 
         stockOnChange, imgUrlOnChange, categoryOnChange, handleSubmit } = props;
     return (<>
-<div className="relative flex flex-col justify-center h-[85dvh] my-5 overflow-hidden bg-base-100">
-    <div className="w-full p-6 m-auto rounded-lg shadow-md max-w-2xl bg-base-200">
-        <h1 className="m-3 text-3xl font-semibold text-center text-primary-focus">
-        Add Product
-        </h1>
         <form className=" grid grid-cols-2 gap-4">
         <div>
             <label className="label">
@@ -68,18 +63,21 @@ export default function ProductsForm(props) {
             <label className="label">
             <span className="text-base label-text">Category</span>
             </label>
-            <input
+            {/* <input
                 onChange={categoryOnChange}
                 type="text"
                 placeholder="Home Address"
                 className="w-full input input-bordered input-primary"
-            />
+            /> */}
+            <select className="w-full input input-bordered input-primary" onChange={categoryOnChange} name="category" id="">
+                <option value="a">1</option>
+                <option value="b">2</option>
+                <option value="c">3</option>
+            </select>
         </div>
         <div>
             <button className="btn btn-primary" onClick={handleSubmit}>Add</button>
         </div>
         </form>
-    </div>
-</div>
     </>)
 }

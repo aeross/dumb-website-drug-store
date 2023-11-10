@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Card({ product }) {
     return (<>
-        <div key={product.id} className="card bg-base-100 shadow-xl">
+        <div className="card bg-base-100 shadow-xl">
             <figure>
                 <img
                 src={product.imgUrl}

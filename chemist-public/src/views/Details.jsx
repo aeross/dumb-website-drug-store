@@ -10,7 +10,6 @@ export default function Details({ url }) {
     useEffect(() => {
         async function fetchProduct() {
             const { data } = await axios.get(`${url}pub/product/${id}`);
-            console.log(data);
             setProduct(data.foundProduct);
         }
         fetchProduct();

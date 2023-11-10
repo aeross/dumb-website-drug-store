@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { redirect } from "react-router-dom";
 import ProductsForm from "../components/ProductsForm";
 
 export default function ProductsAdd({ url, axios }) {
@@ -43,15 +42,22 @@ export default function ProductsAdd({ url, axios }) {
 
     return (<>
 <div id="PRODUCTS-ADD">
-    <ProductsForm 
-        nameOnChange={nameOnChange}
-        descriptionOnChange={descriptionOnChange}
-        priceOnChange={priceOnChange}
-        stockOnChange={stockOnChange}
-        imgUrlOnChange={imgUrlOnChange}
-        categoryOnChange={categoryOnChange}
-        handleSubmit={handleSubmit}
-    />
+    <div className="relative flex flex-col justify-center h-[85dvh] my-5 overflow-hidden bg-base-100">
+        <div className="w-full p-6 m-auto rounded-lg shadow-md max-w-2xl bg-base-200">
+            <h1 className="m-3 text-3xl font-semibold text-center text-primary-focus">
+                Add Product
+            </h1>
+            <ProductsForm 
+                nameOnChange={nameOnChange}
+                descriptionOnChange={descriptionOnChange}
+                priceOnChange={priceOnChange}
+                stockOnChange={stockOnChange}
+                imgUrlOnChange={imgUrlOnChange}
+                categoryOnChange={categoryOnChange}
+                handleSubmit={handleSubmit}
+            />
+        </div>
+    </div>
 </div>
     </>)
 }

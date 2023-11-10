@@ -5,6 +5,7 @@ import ProductsParent from "../views/ProductsParent";
 import Products from "../views/Products";
 import ProductsDetail from "../views/ProductsDetail";
 import ProductsAdd from "../views/ProductsAdd";
+import ProductsEdit from "../views/ProductsEdit";
 const SERVER_URL = "http://35.247.184.191/";
 
 const router = createBrowserRouter([
@@ -19,6 +20,11 @@ const router = createBrowserRouter([
             { path: "", element: <Products url={SERVER_URL} axios={axios}/> },
             { path: ":id", element: <ProductsDetail url={SERVER_URL} axios={axios}/> },
             { path: "add", element: <ProductsAdd url={SERVER_URL} axios={axios}/> },
+            { path: "edit/:id", element: <ProductsEdit url={SERVER_URL} axios={axios} product={"hoho"}/> },
+            // lost URLs
+            { path: "edit/*", element: <h3>You're lost, mate</h3> },
+            { path: "delete/*", element: <h3>You're lost, mate</h3> },
+            { path: "*", element: <h3>You're lost, mate</h3> }
         ]
     },
 
@@ -27,10 +33,11 @@ const router = createBrowserRouter([
         path: "/",
         loader: () => redirect("/pub/product")
     },
-    // any other URLs will redirect to "you're lost, mate"
+
+    // lost URLs
     {
         path: "*",
-        element: <h3>You're lost, mate</h3>  // placeholder
+        element: <h3>You're lost, mate</h3>
     }
 ])
 

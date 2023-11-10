@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 export default function TrProducts({ product }) {
     return (
 <>
-    <tr key={product.id}>
+    <tr>
         <th>{product.id}</th>
         <td>{product.name}</td>
         <td>{product.description}</td>

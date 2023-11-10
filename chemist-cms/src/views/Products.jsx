@@ -42,7 +42,7 @@ export default function Products({ url, axios }) {
             <tbody>
                 {/* row 1 */}
                 { products.map(product => {
-                    return <TrProducts product={product} />
+                    return <TrProducts key={product.id} product={product} />
                 }) }
             </tbody>
         </table>

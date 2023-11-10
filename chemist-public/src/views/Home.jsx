@@ -152,7 +152,7 @@ export default function Home({ url }) {
             {/* main content */}
             <main className="grid grid-cols-4 gap-5 px-10 my-8 bg-base-100">
                 { products.map(product => {
-                    return <Card product={product} />
+                    return <Card key={product.id} product={product} />
                 })}
             </main>
 
