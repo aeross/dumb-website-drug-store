@@ -45,11 +45,11 @@ export default function Login({ url, axios }) {
                 <form className="space-y-4">
                 <div>
                     <label className="label">
-                        <span className="text-base label-text">Email</span>
+                        <span className="text-base label-text">Username</span>
                     </label>
                     <input
                         type="text"
-                        placeholder="Email Address"
+                        placeholder="Enter Username"
                         className="w-full input input-bordered input-primary"
                         onChange={usernameOnChange}
                     />

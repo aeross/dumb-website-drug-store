@@ -44,10 +44,11 @@ export default function ProductsDetail({ url, axios }) {
 
         (async () => {
             try {
-                await axios.patch(`${url}product/${product.id}`, formData, {
+                const { data } = await axios.patch(`${url}product/${product.id}`, formData, {
                     headers: { Authorization: token }
                 });
-                window.location.reload();
+                Swal.fire(data.message);
+                navigate("/product");
             } catch (error) {
                 console.log(error);
                 Swal.fire({
