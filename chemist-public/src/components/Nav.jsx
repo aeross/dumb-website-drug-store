@@ -14,7 +14,7 @@ export default function Nav() {
     </div>
     <div className="navbar-center"></div>
     <div className="navbar-end">
-        <a href="/login"><button className="btn mx-2 btn-primary btn-sm">Log In</button></a>
+        {/* <a href="/login"><button className="btn mx-2 btn-primary btn-sm">Log In</button></a> */}
         {/* <a href="login"><button className="btn mx-2 btn-primary btn-sm">Sign Up</button></a> */}
     </div>
 </nav>

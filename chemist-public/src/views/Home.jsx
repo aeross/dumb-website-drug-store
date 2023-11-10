@@ -2,6 +2,7 @@ import Card from "../components/Card";
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 export default function Home({ url }) {
     const [products, setProducts] = useState([]);
@@ -9,6 +10,8 @@ export default function Home({ url }) {
     const [totalPage, setTotalPage] = useState([]);
     const [search, setSearch] = useState("");
     const [sort, setSort] = useState("");
+    const [filter, setFilter] = useState({ "1": false, "2": false, "3": false });
+    const [limit, setLimit] = useState(10);
     const [query, setQuery] = useState({
         page: "",
         search: "",
@@ -28,7 +31,7 @@ export default function Home({ url }) {
         fetchProducts();
     }, [])
 
-    // functions to handle query params (NOTE: bad requests not handled yet)
+    // functions to handle query params
     async function updateQuery(newQuery) {
         const { page, search, sort, limit, filter } = newQuery;
         let newURL = `${url}pub/product?`;
@@ -38,20 +41,57 @@ export default function Home({ url }) {
         if (limit) newURL += `&limit=${limit}`;
         if (filter) newURL += `&filter[categoryId]=${filter}`;
         
-        const { data } = await axios.get(newURL);
-        setProducts(data.products);
-        setCurrPage(data.currPage);
-        setTotalPage(data.totalPage);
-        setQuery(newQuery);
+        try {
+            const { data } = await axios.get(newURL);
+            setProducts(data.products);
+            setCurrPage(data.currPage);
+            setTotalPage(data.totalPage);
+            setQuery(newQuery);
+        } catch (error) {
+            console.log(error);
+            Swal.fire({
+                icon: "error",
+                title: error,
+                text: error.response.data.message,
+            });
+        }
+    }
+
+    // filter
+    function filterOnChange(event) {
+        const value = event.target.value;
+        let newFilter = { ...filter };
+        newFilter[value] = !newFilter[value];  // toggle between true-false
+        setFilter(newFilter);
+    }
+    function applyFilter(event) {
+        event.preventDefault();
+        let filterQuery = "", count = 0;
+        for (let key in filter) {
+            if (filter[key]) {
+                if (count == 0) {
+                    filterQuery += key;
+                } else {
+                    filterQuery += `,${key}`;
+                }
+                count++;
+            }
+        }
+        let newQuery = { ...query, filter: filterQuery }
+        updateQuery(newQuery);
     }
     
     // pagination
-    async function paginationBtnOnClick(clickedPage) {
+    function paginationBtnOnClick(clickedPage) {
         let newQuery = { ...query, page: `${clickedPage}` }
         updateQuery(newQuery);
     }
     function limitOnChange(event) {
-        let newQuery = { ...query, limit: event.target.value }
+        setLimit(event.target.value);
+    }
+    function applyLimit(event) {
+        event.preventDefault();
+        let newQuery = { ...query, limit: limit }
         updateQuery(newQuery);
     }
 
@@ -87,18 +127,18 @@ export default function Home({ url }) {
                     <form method="get" className="dropdown-content z-[1] menu px-3 m-1 shadow bg-base-100 rounded-box w-64">
                         <div className="flex items-center justify-between">
                             <label htmlFor="a">Prescription Only Medication</label>
-                            <input id="a" name="categoryId" value="1" type="checkbox" className="m-2 h-7 w-7 rounded hover:cursor-pointer accent-primary" />
+                            <input onChange={filterOnChange} id="a" name="categoryId" value="1" type="checkbox" className="m-2 h-7 w-7 rounded hover:cursor-pointer accent-primary" />
                         </div>
                         <div className="flex items-center justify-between">
                             <label htmlFor="b">General Sales List</label>
-                            <input id="b" name="categoryId" value="2" type="checkbox" className="m-2 h-7 w-7 rounded hover:cursor-pointer accent-primary" />
+                            <input onChange={filterOnChange} id="b" name="categoryId" value="2" type="checkbox" className="m-2 h-7 w-7 rounded hover:cursor-pointer accent-primary" />
                         </div>
                         <div className="flex items-center justify-between">
                             <label htmlFor="c">Pharmacy Medicines</label>
-                            <input id="c" name="categoryId" value="3" type="checkbox" className="m-2 h-7 w-7 rounded hover:cursor-pointer accent-primary" />
+                            <input onChange={filterOnChange} id="c" name="categoryId" value="3" type="checkbox" className="m-2 h-7 w-7 rounded hover:cursor-pointer accent-primary" />
                         </div>
                         <div className="flex items-center justify-center">
-                            <button className="btn btn-sm btn-primary h-2 w-16" type="submit">Apply</button>
+                            <button onClick={applyFilter} className="btn btn-sm btn-primary h-2 w-16" type="submit">Apply</button>
                         </div>
                     </form>
                 </div>
@@ -172,20 +212,16 @@ export default function Home({ url }) {
                         }
                         return pages;
                     })() }
-                    {/* <button className="join-item btn btn-sm btn-active">1</button>
-                    <button className="join-item btn btn-sm">2</button>
-                    <button className="join-item btn btn-sm">3</button>
-                    <button className="join-item btn btn-sm">4</button> */}
                 </div>
 
                 <div className="indicator">
                     <input 
                         type="number" 
                         className="input input-bordered input-sm mx-2 w-32" 
-                        placeholder="Limit data"
+                        placeholder="Data per page"
                         onChange={limitOnChange}
                     />
-                    {/* <button type="submit" className="btn btn-sm join-item">Limit</button> */}
+                    <button onClick={applyLimit} type="submit" className="btn btn-sm join-item">Apply</button>
                 </div>
             </footer>
         </div>
