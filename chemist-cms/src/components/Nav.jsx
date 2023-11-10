@@ -49,7 +49,7 @@ export default function Nav() {
             </div>
             </>
         )} */}
-        {/* <button className="btn mx-2 btn-primary btn-sm">Log Out</button> */}
+        <Link to="/add-user"><button className="btn mx-2 btn-primary btn-sm">Add User</button></Link>
         <div className="drawer drawer-end w-12">
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content">

@@ -16,6 +16,11 @@ export default function Categories({ url, axios }) {
         fetchCategories();
     }, [])
 
+    // delete category
+    function buttonOnClick(categoryId) {
+        console.log("delete this category with id", categoryId);
+    }
+
     return(<>
 <div id="CATEGORIES">
     <div className="overflow-x-auto my-6">
@@ -23,7 +28,7 @@ export default function Categories({ url, axios }) {
             <h1 className="my-3 mx-3 text-2xl font-semibold text-primary-focus">
                 Categories
             </h1>
-            <Link to="/categories/add"><button className="btn btn-primary btn-sm mx-3">Add</button></Link>
+            <Link to="/category/add"><button className="btn btn-primary btn-sm mx-3">Add</button></Link>
         </div>
         <table className="table table-zebra">
             {/* head */}
@@ -35,7 +40,10 @@ export default function Categories({ url, axios }) {
             </thead>
             <tbody>
                 { categories.map(category => {
-                    return <TrCategories key={category.id} category={category} />
+                    return (<TrCategories 
+                        key={category.id} 
+                        category={category} 
+                        buttonOnClick={() => { buttonOnClick(category.id) }} />)
                 }) }
             </tbody>
         </table>

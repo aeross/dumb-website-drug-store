@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams, useNavigate } from "react-router-dom"
 
 export default function ProductsDetail({ url, axios }) {
     const { id } = useParams();
+    const navigate = useNavigate();
     // access token
     const token = `Bearer ${localStorage.getItem("accessToken")}`;
+
+    // patch image
+    const [file, setFile] = useState();
+    // function uploadFile(event) {
+    //     event.preventDefault();
+    // }
     
     // fetch data
     const [product, setProduct] = useState({});
@@ -28,6 +35,7 @@ export default function ProductsDetail({ url, axios }) {
         }
         del();
     }
+
 
     return (<>
 <div id="PRODUCTS-DETAIL">
@@ -60,16 +68,32 @@ export default function ProductsDetail({ url, axios }) {
             className="my-1"
         >
             <input
-            type="file"
-            id="image"
-            name="image"
-            className="w-52 hidden"
+                onChange={ (event) => {
+                    event.preventDefault();
+                    let file = event.target.files[0];
+                    let formData = new FormData();
+
+                    formData.append("image", file);
+
+                    (async () => {
+                        await axios.patch(`${url}product/${product.id}`, formData, {
+                            headers: { Authorization: token }
+                        });
+                    })()
+
+                    // trigger reload after everything's done
+                    // navigate(`/product/${product.id}`);
+                } }
+                type="file"
+                id="image"
+                name="image"
+                className="w-52 hidden"
             />
             <label
-            htmlFor="image"
-            className="text-xs ml-1 text-gray-600 hover:text-primary-focus hover:cursor-pointer"
+                htmlFor="image"
+                className="text-xs ml-1 text-gray-600 hover:text-primary-focus hover:cursor-pointer"
             >
-            Upload Image
+                Upload Image
             </label>
         </form>
         </div>

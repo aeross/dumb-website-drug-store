@@ -5,7 +5,7 @@ import { redirect, useNavigate } from "react-router-dom";
 export default function ProductsAdd({ url, axios }) {
     // access token
     const token = localStorage.getItem("accessToken");
-    // const [submit, setSubmit] = useState(false);
+    const navigate = useNavigate();
 
     // post data
     const [name, setName] = useState("");
@@ -33,11 +33,7 @@ export default function ProductsAdd({ url, axios }) {
         setCategoryId(event.target.value);
     }
 
-    // redirect after submission
-    // useEffect(() => {
-    //     if (submit) useNavigate()("/redirect")
-    // }, [submit]);
-    // submit
+    // submission
     async function handleSubmit(event) {
         event.preventDefault();
         const dataToBeAdded = { name, description, price, stock, imgUrl, categoryId };
@@ -45,6 +41,7 @@ export default function ProductsAdd({ url, axios }) {
             headers: { Authorization: `Bearer ${token}` }
         });
         // redirect
+        navigate("/product");
     }
 
     return (<>

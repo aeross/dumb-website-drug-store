@@ -1,4 +1,22 @@
-export default function AddUser() {
+import { useEffect, useState } from "react";
+
+export default function AddUser({ url, axios }) {
+    const token = `Bearer ${localStorage.getItem("accessToken")}`;
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [username, setUsername] = useState("");
+    const [phoneNum, setPhoneNum] = useState("");
+    const [address, setAddress] = useState("");
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+        await axios.post(`${url}add-user`, { email, password, username, phoneNum, address }, {
+            headers: { Authorization: token }
+        })
+        // redirect
+    }
+    
+
     return (
 <>
     <div className="relative flex flex-col justify-center h-[85dvh] my-5 overflow-hidden bg-base-100">
@@ -12,6 +30,7 @@ export default function AddUser() {
                     <span className="text-base label-text">Email</span>
                     </label>
                     <input
+                        onChange={(event) => { setEmail(event.target.value) }}
                         type="text"
                         placeholder="Email Address"
                         className="w-full input input-bordered input-primary"
@@ -22,6 +41,7 @@ export default function AddUser() {
                     <span className="text-base label-text">Password</span>
                     </label>
                     <input
+                        onChange={(event) => { setPassword(event.target.value) }}
                         type="password"
                         placeholder="Enter Password"
                         className="w-full input input-bordered input-primary"
@@ -32,7 +52,8 @@ export default function AddUser() {
                     <span className="text-base label-text">Username</span>
                     </label>
                     <input
-                        type="password"
+                        onChange={(event) => { setUsername(event.target.value) }}
+                        type="text"
                         placeholder="Enter Username"
                         className="w-full input input-bordered input-primary"
                     />
@@ -42,7 +63,8 @@ export default function AddUser() {
                     <span className="text-base label-text">Phone Number</span>
                     </label>
                     <input
-                        type="password"
+                        onChange={(event) => { setPhoneNum(event.target.value) }}
+                        type="text"
                         placeholder="Phone Number"
                         className="w-full input input-bordered input-primary"
                     />
@@ -52,13 +74,14 @@ export default function AddUser() {
                     <span className="text-base label-text">Address</span>
                     </label>
                     <input
-                        type="password"
+                        onChange={(event) => { setAddress(event.target.value) }}
+                        type="text"
                         placeholder="Home Address"
                         className="w-full input input-bordered input-primary"
                     />
                 </div>
                 <div>
-                    <button className="btn btn-primary">Add User</button>
+                    <button onClick={handleSubmit} className="btn btn-primary">Add User</button>
                 </div>
             </form>
         </div>

@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import axios from 'axios';
 import ErrorDisp from '../components/ErrorDisp';
 
-export default function Login({ url }) {
+export default function Login({ url, axios }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
