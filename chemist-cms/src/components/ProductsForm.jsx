@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 export default function ProductsForm(props) {
     const token = localStorage.getItem("accessToken");
     const { url, axios, initialState, nameOnChange, descriptionOnChange, priceOnChange, 
-        stockOnChange, imgUrlOnChange, categoryOnChange, handleSubmit } = props;
-    // console.log(initialState);
+        stockOnChange, imgUrlOnChange, categoryIdOnChange, handleSubmit } = props;
+
     // populate category options by getting category data from "/category"
     const [categories, setCategories] = useState([]);
     useEffect(() => {
@@ -86,7 +86,7 @@ export default function ProductsForm(props) {
             </label>
             <select 
                 className="w-full input input-bordered input-primary" 
-                onChange={categoryOnChange} 
+                onChange={categoryIdOnChange} 
                 name="category" 
                 id=""
             >

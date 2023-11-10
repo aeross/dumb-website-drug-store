@@ -8,25 +8,23 @@ export default function ProductsEdit({ url, axios }) {
 
     // populate form with current values
     const { id } = useParams();
-    const [product, setProduct] = useState({});
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState(0);
     const [stock, setStock] = useState(0);
     const [imgUrl, setImgUrl] = useState("");
-    const [category, setCategory] = useState(0);
+    const [categoryId, setCategoryId] = useState(0);
     useEffect(() => {
         async function fetchProduct() {
             const { data } = await axios.get(`${url}product/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
-            setProduct(data.foundProduct);
             setName(data.foundProduct.name);
             setDescription(data.foundProduct.description);
             setPrice(data.foundProduct.price);
             setStock(data.foundProduct.stock);
             setImgUrl(data.foundProduct.imgUrl);
-            setCategory(data.foundProduct.category);
+            setCategoryId(data.foundProduct.categoryId);
         }
         fetchProduct();
     }, [])
@@ -47,17 +45,16 @@ export default function ProductsEdit({ url, axios }) {
     function imgUrlOnChange(event) {
         setImgUrl(event.target.value);
     }
-    function categoryOnChange(event) {
-        setCategory(event.target.value);
+    function categoryIdOnChange(event) {
+        setCategoryId(event.target.value);
     }
     async function handleSubmit(event) {
         event.preventDefault();
-        const dataToBeAdded = { name, description, price, stock, imgUrl, category };
-        // const { data } = await axios.post(`${url}product/add`, dataToBeAdded, {
-        //     headers: { Authorization: `Bearer ${token}` }
-        // });
-        console.log(dataToBeAdded);
-        // redirect("/product");
+        const dataToBeAdded = { name, description, price, stock, imgUrl, categoryId };
+        const { data } = await axios.put(`${url}product/${id}`, dataToBeAdded, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        // redirect
     }
 
     return (<>
@@ -67,17 +64,16 @@ export default function ProductsEdit({ url, axios }) {
             <h1 className="m-3 text-3xl font-semibold text-center text-primary-focus">
             Edit Product
             </h1>
-            {/* { console.log({ name, description, price, stock, imgUrl, category }) } */}
             <ProductsForm 
                 url={url}
                 axios={axios}
-                initialState={{ name, description, price, stock, imgUrl, category }}
+                initialState={{ name, description, price, stock, imgUrl, categoryId }}
                 nameOnChange={nameOnChange}
                 descriptionOnChange={descriptionOnChange}
                 priceOnChange={priceOnChange}
                 stockOnChange={stockOnChange}
                 imgUrlOnChange={imgUrlOnChange}
-                categoryOnChange={categoryOnChange}
+                categoryIdOnChange={categoryIdOnChange}
                 handleSubmit={handleSubmit}
             />
         </div>

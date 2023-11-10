@@ -18,6 +18,17 @@ export default function ProductsDetail({ url, axios }) {
         fetchProduct();
     }, [])
 
+    // delete data
+    function deleteOnClick() {
+        async function del() {
+            await axios.delete(`${url}product/${id}`, {
+                headers: { Authorization: token }
+            });
+            // redirect
+        }
+        del();
+    }
+
     return (<>
 <div id="PRODUCTS-DETAIL">
 <main>
@@ -40,7 +51,7 @@ export default function ProductsDetail({ url, axios }) {
         </div>
         <div className="buttons">
             <Link to={`/product/edit/${product.id}`}><button className="btn btn-primary mr-2">Edit</button></Link>
-            <button className="btn btn-primary">Delete</button>
+            <button onClick={deleteOnClick} className="btn btn-primary">Delete</button>
         </div>
         <form
             action=""

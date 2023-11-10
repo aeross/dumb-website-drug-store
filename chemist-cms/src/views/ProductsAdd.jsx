@@ -1,9 +1,11 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ProductsForm from "../components/ProductsForm";
+import { redirect, useNavigate } from "react-router-dom";
 
 export default function ProductsAdd({ url, axios }) {
     // access token
     const token = localStorage.getItem("accessToken");
+    // const [submit, setSubmit] = useState(false);
 
     // post data
     const [name, setName] = useState("");
@@ -11,7 +13,7 @@ export default function ProductsAdd({ url, axios }) {
     const [price, setPrice] = useState("");
     const [stock, setStock] = useState("");
     const [imgUrl, setImgUrl] = useState("");
-    const [category, setCategory] = useState(1);
+    const [categoryId, setCategoryId] = useState(1);
     function nameOnChange(event) {
         setName(event.target.value);
     }
@@ -27,17 +29,22 @@ export default function ProductsAdd({ url, axios }) {
     function imgUrlOnChange(event) {
         setImgUrl(event.target.value);
     }
-    function categoryOnChange(event) {
-        setCategory(event.target.value);
+    function categoryIdOnChange(event) {
+        setCategoryId(event.target.value);
     }
+
+    // redirect after submission
+    // useEffect(() => {
+    //     if (submit) useNavigate()("/redirect")
+    // }, [submit]);
+    // submit
     async function handleSubmit(event) {
         event.preventDefault();
-        const dataToBeAdded = { name, description, price, stock, imgUrl, category };
-        // const { data } = await axios.post(`${url}product/add`, dataToBeAdded, {
-        //     headers: { Authorization: `Bearer ${token}` }
-        // });
-        console.log(dataToBeAdded);
-        // redirect("/product");
+        const dataToBeAdded = { name, description, price, stock, imgUrl, categoryId };
+        const { data } = await axios.post(`${url}product`, dataToBeAdded, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        // redirect
     }
 
     return (<>
@@ -50,13 +57,13 @@ export default function ProductsAdd({ url, axios }) {
             <ProductsForm 
                 url={url}
                 axios={axios}
-                initialState={{ name, description, price, stock, imgUrl, category }}
+                initialState={{ name, description, price, stock, imgUrl, categoryId }}
                 nameOnChange={nameOnChange}
                 descriptionOnChange={descriptionOnChange}
                 priceOnChange={priceOnChange}
                 stockOnChange={stockOnChange}
                 imgUrlOnChange={imgUrlOnChange}
-                categoryOnChange={categoryOnChange}
+                categoryIdOnChange={categoryIdOnChange}
                 handleSubmit={handleSubmit}
             />
         </div>

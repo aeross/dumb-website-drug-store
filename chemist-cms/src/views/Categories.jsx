@@ -1,82 +1,42 @@
-export default function Categories() {
+import { useState, useEffect } from "react";
+import TrCategories from "../components/TrCategories";
+import { Link } from "react-router-dom";
+
+export default function Categories({ url, axios }) {
+    const token = localStorage.getItem("accessToken");
+
+    const [categories, setCategories] = useState([]);
+    useEffect(() => {
+        async function fetchCategories() {
+            const { data } = await axios.get(`${url}category`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            setCategories(data.categories);
+        }
+        fetchCategories();
+    }, [])
+
     return(<>
 <div id="CATEGORIES">
     <div className="overflow-x-auto my-6">
-        <h1 className="my-3 mx-3 text-2xl font-semibold text-primary-focus">
-            Categories
-        </h1>
+        <div className="flex justify-between items-center">
+            <h1 className="my-3 mx-3 text-2xl font-semibold text-primary-focus">
+                Categories
+            </h1>
+            <Link to="/categories/add"><button className="btn btn-primary btn-sm mx-3">Add</button></Link>
+        </div>
         <table className="table table-zebra">
             {/* head */}
             <thead>
             <tr>
-                <th />
+                <th>id</th>
                 <th>Name</th>
             </tr>
             </thead>
             <tbody>
-            {/* row 1 */}
-            <tr>
-                <th>1</th>
-                <td>Cy Ganderton</td>
-                <td>
-                <button className="btn btn-primary btn-sm mx-[2px]">Edit</button>
-                <button className="btn btn-primary btn-sm mx-[2px]">
-                    Delete
-                </button>
-                </td>
-            </tr>
-            {/* row 2 */}
-            <tr>
-                <th>2</th>
-                <td>Hart Hagerty</td>
-                <td>
-                <button className="btn btn-primary btn-sm mx-[2px]">Edit</button>
-                <button className="btn btn-primary btn-sm mx-[2px]">
-                    Delete
-                </button>
-                </td>
-            </tr>
-            {/* row 3 */}
-            <tr>
-                <th>3</th>
-                <td>Brice Swyre</td>
-                <td>
-                <button className="btn btn-primary btn-sm mx-[2px]">Edit</button>
-                <button className="btn btn-primary btn-sm mx-[2px]">
-                    Delete
-                </button>
-                </td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>dummy</td>
-                <td>
-                <button className="btn btn-primary btn-sm mx-[2px]">Edit</button>
-                <button className="btn btn-primary btn-sm mx-[2px]">
-                    Delete
-                </button>
-                </td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>dummy</td>
-                <td>
-                <button className="btn btn-primary btn-sm mx-[2px]">Edit</button>
-                <button className="btn btn-primary btn-sm mx-[2px]">
-                    Delete
-                </button>
-                </td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>dummy</td>
-                <td>
-                <button className="btn btn-primary btn-sm mx-[2px]">Edit</button>
-                <button className="btn btn-primary btn-sm mx-[2px]">
-                    Delete
-                </button>
-                </td>
-            </tr>
+                { categories.map(category => {
+                    return <TrCategories key={category.id} category={category} />
+                }) }
             </tbody>
         </table>
     </div>
