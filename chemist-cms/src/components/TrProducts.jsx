@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export default function TrProducts({ product }) {
     return (
 <>
@@ -11,9 +13,9 @@ export default function TrProducts({ product }) {
         <td>{product.Category.name}</td>
         <td>{product.User.username}</td>
         <td>
-        <button className="btn btn-primary btn-sm mx-[2px]">
+        <Link to={`/product/${product.id}`}><button className="btn btn-primary btn-sm mx-[2px]">
             Details
-        </button>
+        </button></Link>
         </td>
     </tr>
 </>

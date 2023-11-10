@@ -1,6 +1,10 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
+import axios from "axios";
 import Login from "../views/Login";
+import ProductsParent from "../views/ProductsParent";
 import Products from "../views/Products";
+import ProductsDetail from "../views/ProductsDetail";
+import ProductsAdd from "../views/ProductsAdd";
 const SERVER_URL = "http://35.247.184.191/";
 
 const router = createBrowserRouter([
@@ -10,8 +14,14 @@ const router = createBrowserRouter([
     },
     {
         path: "/product",
-        element: <Products url={SERVER_URL}/>
+        element: <ProductsParent />,
+        children: [
+            { path: "", element: <Products url={SERVER_URL} axios={axios}/> },
+            { path: ":id", element: <ProductsDetail url={SERVER_URL} axios={axios}/> },
+            { path: "add", element: <ProductsAdd url={SERVER_URL} axios={axios}/> },
+        ]
     },
+
     // "/" will redirect to home page
     {
         path: "/",
