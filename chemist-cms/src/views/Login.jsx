@@ -21,7 +21,7 @@ export default function Login({ url, axios }) {
     }
     useEffect(() => {
         (async () => {
-            if (checkIfLoggedIn()) navigate("/product");
+            if (await checkIfLoggedIn()) navigate("/product");
         })()
     }, []);
 
