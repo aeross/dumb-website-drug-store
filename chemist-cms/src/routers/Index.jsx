@@ -12,7 +12,7 @@ import Categories from "../views/Categories";
 import CategoriesEdit from "../views/CategoriesEdit";
 import CategoriesAdd from "../views/CategoriesAdd";
 
-const SERVER_URL = "http://35.247.184.191/";
+const SERVER_URL = "https://server.andrewdh.tech/";
 
 const router = createBrowserRouter([
     {
