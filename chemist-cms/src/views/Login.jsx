@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
@@ -6,6 +6,24 @@ export default function Login({ url, axios }) {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+
+    // if user is already logged in, redirect to home page
+    async function checkIfLoggedIn() {
+        try {
+            const token = localStorage.getItem("accessToken");
+            await axios.get(`${url}product`, { 
+                headers: { Authorization: `Bearer ${token}` } 
+            });
+            return true;
+        } catch (error) {
+            return false;
+        }
+    }
+    useEffect(() => {
+        (async () => {
+            if (checkIfLoggedIn()) navigate("/product");
+        })()
+    }, []);
 
     function usernameOnChange(event) {
         setUsername(event.target.value);

@@ -52,7 +52,7 @@ const router = createBrowserRouter([
     // "/" will redirect to home page
     {
         path: "/",
-        loader: () => redirect("/product")
+        loader: () => redirect("/login")
     },
 
     // lost URLs
