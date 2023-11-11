@@ -6,7 +6,6 @@ export default function Login({ url, axios }) {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
 
     function usernameOnChange(event) {
         setUsername(event.target.value);
