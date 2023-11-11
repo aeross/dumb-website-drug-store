@@ -39,7 +39,7 @@ export default function ProductsForm(props) {
             <input
                 onChange={descriptionOnChange}
                 type="text"
-                placeholder="Enter Password"
+                placeholder="Enter Description"
                 className="w-full input input-bordered input-primary"
                 value={initialState.description}
             />
@@ -51,7 +51,7 @@ export default function ProductsForm(props) {
             <input
                 onChange={priceOnChange}
                 type="number"
-                placeholder="Enter Username"
+                placeholder="Enter Price"
                 className="w-full input input-bordered input-primary"
                 value={initialState.price}
             />
@@ -63,7 +63,7 @@ export default function ProductsForm(props) {
             <input
                 onChange={stockOnChange}
                 type="number"
-                placeholder="Phone Number"
+                placeholder="Enter Stock"
                 className="w-full input input-bordered input-primary"
                 value={initialState.stock}
             />
@@ -75,7 +75,7 @@ export default function ProductsForm(props) {
             <input
                 onChange={imgUrlOnChange}
                 type="text"
-                placeholder="Phone Number"
+                placeholder="Image URL"
                 className="w-full input input-bordered input-primary"
                 value={initialState.imgUrl}
             />
