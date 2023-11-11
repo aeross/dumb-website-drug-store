@@ -1,6 +1,3 @@
 {
-    "rewrites": [
-        {"source": "/chemist-cms", "destination": "/index.html" },
-        {"source": "/chemist-public", "destination": "/index.html" }
-    ]
+    "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
