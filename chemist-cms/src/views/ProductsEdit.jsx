@@ -103,6 +103,7 @@ export default function ProductsEdit({ url, axios }) {
                 imgUrlOnChange={imgUrlOnChange}
                 categoryIdOnChange={categoryIdOnChange}
                 handleSubmit={handleSubmit}
+                buttonText="Edit"
             />
         </div>
     </div>

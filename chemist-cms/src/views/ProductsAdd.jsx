@@ -76,6 +76,7 @@ export default function ProductsAdd({ url, axios }) {
                 imgUrlOnChange={imgUrlOnChange}
                 categoryIdOnChange={categoryIdOnChange}
                 handleSubmit={handleSubmit}
+                buttonText="Add"
             />
         </div>
     </div>

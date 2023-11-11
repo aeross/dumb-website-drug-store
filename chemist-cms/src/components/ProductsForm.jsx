@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+import ButtonSubmit from "./ButtonSubmit";
 
 export default function ProductsForm(props) {
     const token = localStorage.getItem("accessToken");
     const { url, axios, initialState, nameOnChange, descriptionOnChange, priceOnChange, 
-        stockOnChange, imgUrlOnChange, categoryIdOnChange, handleSubmit } = props;
+        stockOnChange, imgUrlOnChange, categoryIdOnChange, handleSubmit, buttonText } = props;
 
     // populate category options by getting category data from "/category"
     const [categories, setCategories] = useState([]);
@@ -96,7 +97,7 @@ export default function ProductsForm(props) {
             </select>
         </div>
         <div>
-            <button className="btn btn-primary" onClick={handleSubmit}>Submit</button>
+            <ButtonSubmit handleSubmit={handleSubmit} buttonText={buttonText}/>
         </div>
         </form>
     </>)
